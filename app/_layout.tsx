@@ -10,16 +10,17 @@ import { useEffect } from "react";
 import { useColorScheme } from "react-native";
 import Login from "./login";
 import { create } from "zustand";
-
-interface LoginState {
-	name: string;
-	logged_in: boolean;
-}
-
-export const useLoginStore = create<LoginState>((set) => ({
-	name: "",
-	logged_in: false,
-}));
+import {
+	Box,
+	GluestackUIProvider,
+	StatusBar,
+	config,
+} from "@gluestack-ui/themed";
+import {
+	SafeAreaProvider,
+	SafeAreaView,
+} from "react-native-safe-area-context";
+import { useLoginStore } from "./store";
 
 export {
 	// Catch any errors thrown by the Layout component.
@@ -65,15 +66,16 @@ function RootLayoutNav() {
 	const LoginState = useLoginStore((state) => state);
 
 	return (
-		<ThemeProvider value={DefaultTheme}>
-			{LoginState.logged_in ? (
-				<Stack>
-					<Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-					<Stack.Screen name="modal" options={{ presentation: "modal" }} />
-				</Stack>
-			) : (
-				<Login />
-			)}
-		</ThemeProvider>
+		<GluestackUIProvider config={config.theme}>
+			<StatusBar />
+
+			<SafeAreaProvider>
+				<SafeAreaView>
+					<Box width={"100%"}>
+						<Login />
+					</Box>
+				</SafeAreaView>
+			</SafeAreaProvider>
+		</GluestackUIProvider>
 	);
 }
