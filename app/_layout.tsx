@@ -9,18 +9,19 @@ import { SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
 import { useColorScheme } from "react-native";
 import Login from "./login";
-import { create } from "zustand";
 import {
 	Box,
 	GluestackUIProvider,
 	StatusBar,
-	config,
+	StyledProvider,
+	createConfig,
 } from "@gluestack-ui/themed";
 import {
 	SafeAreaProvider,
 	SafeAreaView,
 } from "react-native-safe-area-context";
 import { useLoginStore } from "./store";
+import { config } from "../gluestack-ui.config";
 
 export {
 	// Catch any errors thrown by the Layout component.
@@ -60,13 +61,15 @@ export default function RootLayout() {
 
 	return <RootLayoutNav />;
 }
-
+import { createProvider } from "@gluestack-ui/provider";
+const Provider = createProvider({ StyledProvider }) as any;
+Provider.displayName = "CustomProvider";
 function RootLayoutNav() {
 	const colorScheme = useColorScheme();
 	const LoginState = useLoginStore((state) => state);
 
 	return (
-		<GluestackUIProvider config={config.theme}>
+		<Provider config={config}>
 			<StatusBar />
 
 			<SafeAreaProvider>
@@ -76,6 +79,6 @@ function RootLayoutNav() {
 					</Box>
 				</SafeAreaView>
 			</SafeAreaProvider>
-		</GluestackUIProvider>
+		</Provider>
 	);
 }

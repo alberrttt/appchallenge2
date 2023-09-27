@@ -44,7 +44,7 @@ export default function Login() {
 					</Heading>
 					<VStack space="xs">
 						<Text
-							color="$text500"
+							color={"$textLight600"}
 							lineHeight="$xs"
 							fontFamily="Lato"
 							fontSize={"$xl"}
@@ -58,7 +58,7 @@ export default function Login() {
 					<Box py={"$2"} />
 					<VStack space="xs">
 						<Text
-							color="$text500"
+							color={"$textLight600"}
 							lineHeight="$xs"
 							fontFamily="Lato"
 							fontSize={"$xl"}
@@ -83,12 +83,12 @@ export default function Login() {
 						p={"$2"}
 						mt="$4"
 						ml="auto"
-						backgroundColor="#03A9F4"
+						backgroundColor={"$primary400"}
 						onPress={() => {
 							// setShowModal(false);
 						}}
 					>
-						<ButtonText color="$white">Save</ButtonText>
+						<ButtonText fontSize={"$2xl"}>Login</ButtonText>
 					</Button>
 				</VStack>
 			</FormControl>
