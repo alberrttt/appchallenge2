@@ -11,6 +11,7 @@ import {
 	InputIcon,
 	Heading,
 	FormControl,
+	HStack,
 } from "@gluestack-ui/themed";
 import { useLoginStore } from "./store";
 
@@ -34,7 +35,7 @@ export default function Login() {
 					},
 				}}
 			>
-				<VStack>
+				<VStack gap={"$4"}>
 					<Heading
 						color="$textDark900"
 						fontSize={"$4xl"}
@@ -42,54 +43,63 @@ export default function Login() {
 					>
 						Login
 					</Heading>
-					<VStack space="xs">
-						<Text
-							color={"$textLight600"}
-							lineHeight="$xs"
-							fontFamily="Lato"
-							fontSize={"$xl"}
-						>
-							Your Name
-						</Text>
-						<Input>
-							<InputField type="text" />
-						</Input>
-					</VStack>
-					<Box py={"$2"} />
-					<VStack space="xs">
-						<Text
-							color={"$textLight600"}
-							lineHeight="$xs"
-							fontFamily="Lato"
-							fontSize={"$xl"}
-						>
-							Password
-						</Text>
-						<Input>
-							{/* <InputField type={showPassword ? "text" : "password"} /> */}
-							<InputSlot
-								pr="$3"
-								// onPress={handleState}
+					<VStack>
+						<VStack space="xs">
+							<Text
+								color={"$textLight600"}
+								lineHeight="$xs"
+								fontFamily="Lato"
+								fontSize={"$xl"}
 							>
-								{/* EyeIcon, EyeOffIcon are both imported from 'lucide-react-native' */}
-								<InputIcon
-									// as={showPassword ? EyeIcon : EyeOffIcon}
-									color="$darkBlue500"
-								/>
-							</InputSlot>
-						</Input>
+								Your Name
+							</Text>
+							<Input>
+								<InputField type="text" />
+							</Input>
+						</VStack>
+						<Box py={"$2"} />
+						<VStack space="xs">
+							<Text
+								color={"$textLight600"}
+								lineHeight="$xs"
+								fontFamily="Lato"
+								fontSize={"$xl"}
+							>
+								Password
+							</Text>
+							<Input>
+								{/* <InputField type={showPassword ? "text" : "password"} /> */}
+								<InputSlot
+									pr="$3"
+									// onPress={handleState}
+								>
+									{/* EyeIcon, EyeOffIcon are both imported from 'lucide-react-native' */}
+									<InputIcon
+										// as={showPassword ? EyeIcon : EyeOffIcon}
+										color="$darkBlue500"
+									/>
+								</InputSlot>
+							</Input>
+						</VStack>
 					</VStack>
-					<Button
-						p={"$2"}
-						mt="$4"
-						ml="auto"
-						backgroundColor={"$primary400"}
-						onPress={() => {
-							// setShowModal(false);
-						}}
+					<HStack
+						w="100%"
+						justifyContent="flex-start"
+						alignItems="flex-end"
 					>
-						<ButtonText fontSize={"$2xl"}>Login</ButtonText>
-					</Button>
+						<Button
+							p={"$2"}
+							mt="$4"
+							ml="auto"
+							backgroundColor={"$primary400"}
+							onPress={() => {
+								login.setLoggedIn("a");
+							}}
+							w={"100%"}
+						>
+							<ButtonText fontSize={"$2xl"}>Login</ButtonText>
+						</Button>
+					</HStack>
 				</VStack>
 			</FormControl>
 		</Box>

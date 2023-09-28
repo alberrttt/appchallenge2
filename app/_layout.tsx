@@ -5,7 +5,7 @@ import {
 	ThemeProvider,
 } from "@react-navigation/native";
 import { useFonts } from "expo-font";
-import { SplashScreen, Stack } from "expo-router";
+import { SplashScreen, Stack, Tabs } from "expo-router";
 import { useEffect } from "react";
 import { useColorScheme } from "react-native";
 import Login from "./login";
@@ -62,6 +62,7 @@ export default function RootLayout() {
 	return <RootLayoutNav />;
 }
 import { createProvider } from "@gluestack-ui/provider";
+import TabLayout from "./(tabs)/_layout";
 const Provider = createProvider({ StyledProvider }) as any;
 Provider.displayName = "CustomProvider";
 function RootLayoutNav() {
@@ -74,9 +75,15 @@ function RootLayoutNav() {
 
 			<SafeAreaProvider>
 				<SafeAreaView>
-					<Box width={"100%"}>
-						<Login />
-					</Box>
+					{LoginState.logged_in ? (
+						<Tabs>
+							<Tabs.Screen name="hello" />
+						</Tabs>
+					) : (
+						<Box width={"100%"}>
+							<Login />
+						</Box>
+					)}
 				</SafeAreaView>
 			</SafeAreaProvider>
 		</Provider>
