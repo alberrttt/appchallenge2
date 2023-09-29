@@ -72,20 +72,25 @@ function RootLayoutNav() {
 	return (
 		<Provider config={config}>
 			<StatusBar />
-
-			<SafeAreaProvider>
-				<SafeAreaView>
-					{LoginState.logged_in ? (
-						<Tabs>
-							<Tabs.Screen name="hello" />
-						</Tabs>
-					) : (
-						<Box width={"100%"}>
-							<Login />
-						</Box>
-					)}
-				</SafeAreaView>
-			</SafeAreaProvider>
+			{LoginState.logged_in ? (
+				<Stack
+					screenOptions={{
+						headerShown: false,
+						headerTitle: undefined,
+					}}
+				>
+					<Stack.Screen
+						name="modal"
+						options={{ headerShown: false, header: undefined }}
+					/>
+					<Stack.Screen
+						name="(tabs)"
+						options={{ headerShown: false, header: undefined }}
+					/>
+				</Stack>
+			) : (
+				<Login />
+			)}
 		</Provider>
 	);
 }
