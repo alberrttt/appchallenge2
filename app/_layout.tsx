@@ -1,8 +1,8 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import {
-	DarkTheme,
-	DefaultTheme,
-	ThemeProvider,
+  DarkTheme,
+  DefaultTheme,
+  ThemeProvider,
 } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import { SplashScreen, Stack, Tabs } from "expo-router";
@@ -10,87 +10,85 @@ import { useEffect } from "react";
 import { useColorScheme } from "react-native";
 import Login from "./login";
 import {
-	Box,
-	GluestackUIProvider,
-	StatusBar,
-	StyledProvider,
-	createConfig,
+  Box,
+  GluestackUIProvider,
+  StatusBar,
+  StyledProvider,
+  createConfig,
 } from "@gluestack-ui/themed";
-import {
-	SafeAreaProvider,
-	SafeAreaView,
-} from "react-native-safe-area-context";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { useLoginStore } from "./store";
 import { config } from "../gluestack-ui.config";
 
 export {
-	// Catch any errors thrown by the Layout component.
-	ErrorBoundary,
+  // Catch any errors thrown by the Layout component.
+  ErrorBoundary,
 } from "expo-router";
 
 export const unstable_settings = {
-	// Ensure that reloading on `/modal` keeps a back button present.
-	initialRouteName: "(tabs)",
+  // Ensure that reloading on `/modal` keeps a back button present.
+  initialRouteName: "(tabs)",
 };
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-	const [loaded, error] = useFonts({
-		SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
-		Lato: require("../assets/fonts/Lato400-Reg.ttf"),
-		Inter: require("../assets/fonts/Inter.ttf"),
-		...FontAwesome.font,
-	});
+  const [loaded, error] = useFonts({
+    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
+    Lato: require("../assets/fonts/Lato400-Reg.ttf"),
+    Inter: require("../assets/fonts/Inter.ttf"),
+    ...FontAwesome.font,
+  });
 
-	// Expo Router uses Error Boundaries to catch errors in the navigation tree.
-	useEffect(() => {
-		if (error) throw error;
-	}, [error]);
+  // Expo Router uses Error Boundaries to catch errors in the navigation tree.
+  useEffect(() => {
+    if (error) throw error;
+  }, [error]);
 
-	useEffect(() => {
-		if (loaded) {
-			SplashScreen.hideAsync();
-		}
-	}, [loaded]);
+  useEffect(() => {
+    if (loaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded]);
 
-	if (!loaded) {
-		return null;
-	}
+  if (!loaded) {
+    return null;
+  }
 
-	return <RootLayoutNav />;
+  return <RootLayoutNav />;
 }
 import { createProvider } from "@gluestack-ui/provider";
 import TabLayout from "./(tabs)/_layout";
 const Provider = createProvider({ StyledProvider }) as any;
 Provider.displayName = "CustomProvider";
 function RootLayoutNav() {
-	const colorScheme = useColorScheme();
-	const LoginState = useLoginStore((state) => state);
+  const colorScheme = useColorScheme();
+  const LoginState = useLoginStore((state) => state);
 
-	return (
-		<Provider config={config}>
-			<StatusBar />
-			{LoginState.logged_in ? (
-				<Stack
-					screenOptions={{
-						headerShown: false,
-						headerTitle: undefined,
-					}}
-				>
-					<Stack.Screen
-						name="modal"
-						options={{ headerShown: false, header: undefined }}
-					/>
-					<Stack.Screen
-						name="(tabs)"
-						options={{ headerShown: false, header: undefined }}
-					/>
-				</Stack>
-			) : (
-				<Login />
-			)}
-		</Provider>
-	);
+  return (
+    <Provider config={config}>
+      <StatusBar />
+
+      {LoginState.logged_in ? (
+        <Stack
+          screenOptions={{
+            headerShown: false,
+            headerTitle: undefined,
+          }}
+        >
+          <Stack.Screen
+            name="modal"
+            options={{ headerShown: false, header: undefined }}
+          />
+          <Stack.Screen
+            name="(tabs)"
+            options={{ headerShown: false, header: undefined }}
+          />
+        </Stack>
+      ) : (
+        <Login />
+      )}
+    </Provider>
+  );
 }
