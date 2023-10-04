@@ -58,6 +58,7 @@ export default function RootLayout() {
 
   return <RootLayoutNav />;
 }
+import { Image } from "@gluestack-ui/themed";
 import { createProvider } from "@gluestack-ui/provider";
 import TabLayout from "./(tabs)/_layout";
 const Provider = createProvider({ StyledProvider }) as any;

@@ -22,19 +22,19 @@ import {
   SelectTrigger,
   Switch,
   VStack,
+  Image,
 } from "@gluestack-ui/themed";
 import { SafeAreaView } from "react-native-safe-area-context";
 import SelectDropdown from "react-native-select-dropdown";
 import { Posts } from "../../components/Posts";
-
 export default function HomeScreen() {
   return (
     <SafeAreaView>
-      <Box p={"$8"}>
+      <Box p={"$8"} px={"$4"}>
         <VStack>
           <Heading fontSize={"$3xl"}>Community Service</Heading>
           <Box
-            py={"$4"}
+            py={"$2"}
             flexDirection="row"
             justifyContent="space-between"
             alignItems="center"
