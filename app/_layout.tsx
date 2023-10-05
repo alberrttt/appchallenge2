@@ -11,10 +11,12 @@ import { useColorScheme } from "react-native";
 import Login from "./login";
 import {
   Box,
+  Button,
   GluestackUIProvider,
   StatusBar,
   StyledProvider,
   createConfig,
+  Text,
 } from "@gluestack-ui/themed";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { useLoginStore } from "./store";
@@ -38,6 +40,8 @@ export default function RootLayout() {
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
     Lato: require("../assets/fonts/Lato400-Reg.ttf"),
     Inter: require("../assets/fonts/Inter.ttf"),
+    "Montserrat-Regular": require("../assets/fonts/Montserrat-Regular.ttf"),
+    "Montserrat-Medium": require("../assets/fonts/Montserrat-Medium.ttf"),
     ...FontAwesome.font,
   });
 
@@ -86,6 +90,7 @@ function RootLayoutNav() {
             name="(tabs)"
             options={{ headerShown: false, header: undefined }}
           />
+          <Stack.Screen name="moreInfo" />
         </Stack>
       ) : (
         <Login />
