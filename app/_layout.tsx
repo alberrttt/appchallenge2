@@ -6,7 +6,7 @@ import {
 } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import { SplashScreen, Stack, Tabs } from "expo-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useColorScheme } from "react-native";
 import Login from "./login";
 import {
@@ -36,6 +36,10 @@ export const unstable_settings = {
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+  const [loading, setLoading] = useState(0);
+  if (!setLoading) {
+    return <SplashScreen />;
+  }
   const [loaded, error] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
     Lato: require("../assets/fonts/Lato400-Reg.ttf"),

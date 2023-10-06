@@ -20,7 +20,7 @@ export function Posts() {
 }
 
 function Post() {
-const router = useRouter();
+  const router = useRouter();
   return (
     <VStack>
       <Image
@@ -42,8 +42,8 @@ const router = useRouter();
         </VStack>
         <VStack>
           <Button onPress={() => {
-router.push("/moreInfo")
-}} backgroundColor="#03A9F4" borderRadius={"$lg"}>
+            router.push("/moreInfo")
+          }} backgroundColor="#03A9F4" borderRadius={"$lg"}>
             <Text color="white" fontSize={"$lg"} fontWeight="600" underline>
               Find Out More
             </Text>
