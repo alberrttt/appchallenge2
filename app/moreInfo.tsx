@@ -51,42 +51,30 @@ export default function MoreInfo() {
           alt={"school"}
         />
         <VStack>
-          <Heading fontSize={"$3xl"} mt="$2">Sunset Lane</Heading>
-          <Text color="$coolGray500" fontSize={"$lg"}>
+          <Heading fontSize={"$3xl"} mt="$2" >Sunset Lane</Heading>
+          <Text color="$coolGray600" fontSize={"$lg"}>
             Help needed
           </Text>
 
         </VStack>
         <VStack gap={"$2"}>
 
-          <HStack gap={"$2"} justifyContent="space-between" maxWidth={'$full'} mt={"$2"}>
 
+          <HStack w={"100%"} justifyContent='space-between'>
             <InfoUnit title="Hours avaliable" body="10 hours" />
+            <InfoUnit title="Distance" body="1.2 miles" />
           </HStack>
 
           <HStack w="100%" justifyContent="space-between" space="md">
 
-            <VStack>
-              <Text fontWeight="$extrabold">
-                Time
-              </Text>
+            <InfoUnit title="When" body="Monday, 3 PM" />
+            <InfoUnit title="Occurence" body="Weekly" />
 
-              <Text flexWrap="wrap" fontSize={"$xl"}>
-                3:00 P.M.
-              </Text>
-            </VStack>
           </HStack>
-          <Box>
-            <Text fontWeight="$extrabold">
-              Hours avaliable
-            </Text>
-
-            <Text fontSize={"$xl"}>
-              10 hours
-            </Text>
-          </Box>
         </VStack>
-        <Button backgroundColor={"$primary400"} alignSelf="center" m="$2" w="100%" mt={"$4"}>
+        <Button backgroundColor={"$primary400"} alignSelf="center" m="$2" w="100%" mt={"$4"} onPress={() => {
+          router.push('/apply')
+        }}>
           <Text color="$white">
             Apply
           </Text>

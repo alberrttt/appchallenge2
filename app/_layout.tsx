@@ -5,7 +5,7 @@ import {
   ThemeProvider,
 } from "@react-navigation/native";
 import { useFonts } from "expo-font";
-import { SplashScreen, Stack, Tabs } from "expo-router";
+import { SplashScreen, Stack, Tabs, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { useColorScheme } from "react-native";
 import Login from "./login";
@@ -74,31 +74,32 @@ Provider.displayName = "CustomProvider";
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
   const LoginState = useLoginStore((state) => state);
-
+  const router = useRouter();
+  useEffect(() => {
+    router.push('/login');
+  }, [])
   return (
     <Provider config={config}>
       <StatusBar />
 
-      {LoginState.logged_in ? (
-        <Stack
-          screenOptions={{
-            headerShown: false,
-            headerTitle: undefined,
-          }}
-        >
-          <Stack.Screen
-            name="modal"
-            options={{ headerShown: false, header: undefined }}
-          />
-          <Stack.Screen
-            name="(tabs)"
-            options={{ headerShown: false, header: undefined }}
-          />
-          <Stack.Screen name="moreInfo" />
-        </Stack>
-      ) : (
-        <Login />
-      )}
+      <Stack
+        screenOptions={{
+          headerShown: false,
+          headerTitle: undefined,
+        }}
+      >
+        <Stack.Screen name="login" />
+        <Stack.Screen
+          name="modal"
+          options={{ headerShown: false, header: undefined }}
+        />
+        <Stack.Screen
+          name="(tabs)"
+          options={{ headerShown: false, header: undefined }}
+        />
+        <Stack.Screen name="moreInfo" />
+      </Stack>
+
     </Provider>
   );
 }

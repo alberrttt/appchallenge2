@@ -26,12 +26,14 @@ export default function TabLayout() {
 
 	return (
 		<Tabs
+			initialRouteName="index"
 			screenOptions={{
 				headerShown: false,
 				tabBarBackground: () => {
 					return <View style={{ backgroundColor: "#4AA9FF" }}></View>;
 				},
-			}}
+			}
+			}
 		>
 			<Tabs.Screen
 				name="index"
@@ -42,6 +44,6 @@ export default function TabLayout() {
 					},
 				}}
 			/>
-		</Tabs>
+		</Tabs >
 	);
 }
