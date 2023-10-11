@@ -69,6 +69,7 @@ export default function RootLayout() {
 import { Image } from "@gluestack-ui/themed";
 import { createProvider } from "@gluestack-ui/provider";
 import TabLayout from "./(tabs)/_layout";
+import { BlurView } from "expo-blur";
 const Provider = createProvider({ StyledProvider }) as any;
 Provider.displayName = "CustomProvider";
 function RootLayoutNav() {
@@ -76,12 +77,23 @@ function RootLayoutNav() {
   const LoginState = useLoginStore((state) => state);
   const router = useRouter();
   useEffect(() => {
-    router.push('/login');
-  }, [])
+    router.push("/login");
+  }, []);
   return (
     <Provider config={config}>
       <StatusBar />
-
+      <BlurView
+        style={{
+          height: "100%",
+          position: "absolute",
+          width: "100%",
+          maxWidth: "100%",
+          padding: 0,
+          margin: 0,
+        }}
+        intensity={50}
+        tint={"light"}
+      ></BlurView>
       <Stack
         screenOptions={{
           headerShown: false,
@@ -99,7 +111,6 @@ function RootLayoutNav() {
         />
         <Stack.Screen name="moreInfo" />
       </Stack>
-
     </Provider>
   );
 }
