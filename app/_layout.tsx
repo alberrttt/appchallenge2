@@ -29,7 +29,7 @@ export {
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: "(tabs)",
+  initialRouteName: "login",
 };
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -50,6 +50,7 @@ export default function RootLayout() {
   });
 
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
+
   useEffect(() => {
     if (error) throw error;
   }, [error]);
@@ -82,18 +83,7 @@ function RootLayoutNav() {
   return (
     <Provider config={config}>
       <StatusBar />
-      <BlurView
-        style={{
-          height: "100%",
-          position: "absolute",
-          width: "100%",
-          maxWidth: "100%",
-          padding: 0,
-          margin: 0,
-        }}
-        intensity={50}
-        tint={"light"}
-      ></BlurView>
+
       <Stack
         screenOptions={{
           headerShown: false,

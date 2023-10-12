@@ -28,7 +28,9 @@ import {
   Text,
   Textarea,
   TextareaInput,
+  Toast,
   VStack,
+  useToast,
 } from "@gluestack-ui/themed";
 import { router } from "expo-router";
 import React from "react";
@@ -102,19 +104,27 @@ export default function Apply() {
 
 function SubmitButton() {
   const [showAlertDialog, setShowAlertDialog] = React.useState(true);
-
+  const toast = useToast();
   return (
     <>
       <Button
         mt={"$4"}
         w={"100%"}
-        onPress={() => setShowAlertDialog(!showAlertDialog)}
+        onPress={() => {
+          toast.show({
+            placement: "top",
+            render: (props) => {
+              return (
+                <Box>
+                  <Heading>Thank you for volunteering!</Heading>
+                </Box>
+              );
+            },
+          });
+        }}
       >
         <ButtonText>Submit</ButtonText>
       </Button>
-      {showAlertDialog ? (
-       
-      ) : undefined}
     </>
   );
 }
