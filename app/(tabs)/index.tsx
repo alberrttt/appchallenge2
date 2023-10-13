@@ -36,7 +36,7 @@ export default function HomeScreen() {
           py={"$2"}
           flexDirection="row"
           justifyContent="space-between"
-          alignItems="center"
+          alignItems="flex-end"
         >
           <Box flexGrow={1}>
             <Select>

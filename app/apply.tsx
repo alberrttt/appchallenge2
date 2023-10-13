@@ -32,7 +32,12 @@ import {
   VStack,
   useToast,
 } from "@gluestack-ui/themed";
-import { router } from "expo-router";
+import {
+  router,
+  useGlobalSearchParams,
+  useLocalSearchParams,
+  useRouter,
+} from "expo-router";
 import React from "react";
 import { BlurView } from "expo-blur";
 import { useState } from "react";
@@ -41,6 +46,7 @@ export default function Apply() {
   const [hours, setHours] = useState(0);
   const Hours = Math.floor(hours);
   const minutes = Math.floor((hours - Hours) * 60);
+  const props = useGlobalSearchParams();
   return (
     <Box mt="$20" px="$6">
       <Pressable
@@ -57,7 +63,7 @@ export default function Apply() {
         <Text fontSize="$2xl">Volunteer at</Text>
 
         <Heading fontSize="$4xl" pt="$2">
-          Sunset Lane
+          {props.title}
         </Heading>
         <VStack mt="$4">
           <VStack space="xs" gap="$4" maxWidth={"$80"}>
@@ -76,7 +82,9 @@ export default function Apply() {
               orientation="horizontal"
               isDisabled={false}
               isReversed={false}
-              onChange={(num) => setHours(num / 20)}
+              onChange={(num) =>
+                setHours((num / 100) * Number(props.timeNeeded))
+              }
             >
               <SliderTrack>
                 <SliderFilledTrack />

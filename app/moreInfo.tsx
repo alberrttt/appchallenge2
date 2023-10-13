@@ -6,28 +6,33 @@ import {
   Text,
   ArrowLeftIcon,
   HStack,
-  Image
+  Image,
 } from "@gluestack-ui/themed";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Stack, useRouter } from "expo-router";
+import { Stack, useGlobalSearchParams, useRouter } from "expo-router";
 import { Button as DefaultButton } from "@gluestack-ui/themed";
 import { Pressable } from "react-native";
-function InfoUnit({ title, body }: { body: string, title: string }) {
-  return <VStack>
-    <Text fontWeight="$extrabold" fontSize={"$lg"} color="$trueGray900">
-      {title}
-    </Text>
+import { Params } from "../params";
+function InfoUnit({ title, body }: { body: string; title: string }) {
+  return (
+    <VStack>
+      <Text fontWeight="$extrabold" fontSize={"$lg"} color="$trueGray900">
+        {title}
+      </Text>
 
-    <Text fontSize={"$xl"} color="$trueGray600">
-      {body}
-    </Text>
-  </VStack>
+      <Text fontSize={"$xl"} color="$trueGray600">
+        {body}
+      </Text>
+    </VStack>
+  );
 }
 export default function MoreInfo() {
   const router = useRouter();
+  const params: Params = useGlobalSearchParams() as unknown as Params;
+  const { title, uri, timeNeeded, distance } = params;
   return (
     <Box mt={"$10"}>
-      <VStack p="$4" alignItems="flex-start" gap={"$2"} >
+      <VStack p="$4" alignItems="flex-start" gap={"$2"}>
         <Pressable
           onPress={() => {
             router.back();
@@ -35,51 +40,62 @@ export default function MoreInfo() {
         >
           <HStack alignItems="center">
             <ArrowLeftIcon />
-            <Text >Go back</Text>
+            <Text>Go back</Text>
           </HStack>
         </Pressable>
 
         <Image
           borderRadius={8}
           source={{
-            uri: "https://imagescdn.homes.com/i2/0mTZG77SlD9lbsEdBh6r_2HJa9ZdabEWoVfDd0nZVMc/117/image.jpg?p=1",
+            uri: uri,
           }}
-          maxWidth={'$full'}
+          maxWidth={"$full"}
           w="$full"
           aspectRatio={"1"}
           alignSelf="center"
           alt={"school"}
         />
         <VStack>
-          <Heading fontSize={"$3xl"} mt="$2" >Sunset Lane</Heading>
+          <Heading fontSize={"$3xl"} mt="$2">
+            {title}
+          </Heading>
           <Text color="$coolGray600" fontSize={"$lg"}>
             Help needed
           </Text>
-
         </VStack>
         <VStack gap={"$2"}>
-
-
-          <HStack w={"100%"} justifyContent='space-between'>
-            <InfoUnit title="Hours avaliable" body="10 hours" />
-            <InfoUnit title="Distance" body="1.2 miles" />
+          <HStack w={"100%"} justifyContent="space-between">
+            <InfoUnit
+              title="Hours avaliable"
+              body={`${timeNeeded} ${timeNeeded == 1 ? "hour" : "hours"}`}
+            />
+            <InfoUnit
+              title="Distance"
+              body={`${distance} ${distance == 1 ? "mile" : "miles"}`}
+            />
           </HStack>
 
           <HStack w="100%" justifyContent="space-between" space="md">
-
             <InfoUnit title="When" body="Monday, 3 PM" />
             <InfoUnit title="Occurence" body="Weekly" />
-
           </HStack>
         </VStack>
-        <Button backgroundColor={"$primary400"} alignSelf="center" m="$2" w="100%" mt={"$4"} onPress={() => {
-          router.push('/apply')
-        }}>
-          <Text color="$white">
-            Apply
-          </Text>
+        <Button
+          backgroundColor={"$primary400"}
+          alignSelf="center"
+          m="$2"
+          w="100%"
+          mt={"$4"}
+          onPress={() => {
+            router.push({
+              pathname: "/apply",
+              params: params as {},
+            });
+          }}
+        >
+          <Text color="$white">Apply</Text>
         </Button>
       </VStack>
-    </Box >
+    </Box>
   );
 }
