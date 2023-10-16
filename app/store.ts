@@ -9,6 +9,24 @@ export const useLoginStore = create<LoginState>((set) => ({
   logged_in: false,
   setLoggedIn: (name: string) => set({ name, logged_in: true }),
 }));
+export const useApplications = create<{
+  applications: Application[];
+  setApplications: (applications: Application[]) => void;
+  pushApplication: (application: Application) => void;
+}>((set) => ({
+  applications: [
+    {
+      amountTime:0,
+      info: {
+        
+      }
+    }
+  ],
+  setApplications: (applications: Application[]) =>
+    set({ applications: applications }),
+  pushApplication: (application: Application) =>
+    set((state) => ({ applications: [...state.applications, application] })),
+}));
 
 interface ScreenState {
   blur: boolean;

@@ -73,75 +73,78 @@ function Post({
       boxShadow="$amber200"
       softShadow="3"
     >
-      <Image
-        borderRadius={8}
-        source={{
-          uri: uri,
-        }}
-        w={"100%"}
-        h={"$96"}
-        alignSelf="center"
-        alt={"school"}
-      />
-      <Box p="$0.5">
-        <VStack gap={"$0"}>
-          <Heading underline fontSize={"$xl"} fontFamily="Montserrat-Medium">
-            {title}
-          </Heading>
-          <Text fontSize={"$lg"}>{description}</Text>
-
-          <VStack justifyContent="space-between" mt="$2">
-            <Text
-              fontSize={"$md"}
-              color="$blueGray500"
-              fontFamily="Montserrat-Medium"
-            >
-              {time} {time == 1 ? "Hour" : "Hours"} avaliable
-            </Text>
-            <Text
-              fontSize={"$md"}
-              color="$blueGray500"
-              fontFamily="Montserrat-Medium"
-            >
-              {distance} {distance == 1 ? "Mile" : "Miles"} away
-            </Text>
-          </VStack>
-        </VStack>
-        <Button
-          onPress={() => {
-            router.push({
-              pathname: "/moreInfo",
-              params: {
-                title: title,
-                uri: uri,
-                timeNeeded: time,
-                distance,
-              },
-            });
+      <VStack space="md">
+        <Image
+          borderRadius={8}
+          source={{
+            uri: uri,
           }}
-          backgroundColor="#03A9F4"
-          borderRadius={"$lg"}
-        >
-          <Text color="white" fontSize={"$lg"} fontWeight="600" underline>
-            Find Out More
-          </Text>
-        </Button>
+          w={"100%"}
+          h={"$96"}
+          alignSelf="center"
+          alt={"school"}
+        />
+        <Box p="$0.5">
+          <VStack gap={"$0"}>
+            <Heading underline fontSize={"$xl"} fontFamily="Montserrat-Medium">
+              {title}
+            </Heading>
+            <Text fontSize={"$lg"}>{description}</Text>
 
-        {urgent !== undefined ? (
-          <Box backgroundColor="$red500" p="$2" mt="$1" borderRadius={"$lg"}>
-            <Text
-              color="$white"
-              fontFamily="Montserrat-Medium"
-              textAlign="center"
-              fontSize={"$md"}
-            >
-              Urgent: {urgent}
+            <VStack justifyContent="space-between">
+              <Text
+                fontSize={"$md"}
+                color="$blueGray500"
+                fontFamily="Montserrat-Medium"
+              >
+                {time} {time == 1 ? "Hour" : "Hours"} avaliable
+              </Text>
+              <Text
+                fontSize={"$md"}
+                color="$blueGray500"
+                fontFamily="Montserrat-Medium"
+              >
+                {distance} {distance == 1 ? "Mile" : "Miles"} away
+              </Text>
+            </VStack>
+          </VStack>
+          <Button
+            mt="$2"
+            onPress={() => {
+              router.push({
+                pathname: "/moreInfo",
+                params: {
+                  title: title,
+                  uri: uri,
+                  timeNeeded: time,
+                  distance,
+                },
+              });
+            }}
+            backgroundColor="#03A9F4"
+            borderRadius={"$lg"}
+          >
+            <Text color="white" fontSize={"$lg"} fontWeight="600" underline>
+              Find Out More
             </Text>
-          </Box>
-        ) : (
-          ""
-        )}
-      </Box>
+          </Button>
+
+          {urgent !== undefined ? (
+            <Box backgroundColor="$red500" p="$2" mt="$1" borderRadius={"$lg"}>
+              <Text
+                color="$white"
+                fontFamily="Montserrat-Medium"
+                textAlign="center"
+                fontSize={"$md"}
+              >
+                Urgent: {urgent}
+              </Text>
+            </Box>
+          ) : (
+            ""
+          )}
+        </Box>
+      </VStack>
     </Box>
   );
 }

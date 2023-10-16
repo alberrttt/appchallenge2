@@ -95,6 +95,7 @@ function RootLayoutNav() {
           name="modal"
           options={{ headerShown: false, header: undefined }}
         />
+        <Stack.Screen name="editGoals" />
         <Stack.Screen
           name="(tabs)"
           options={{ headerShown: false, header: undefined }}

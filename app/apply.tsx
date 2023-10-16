@@ -113,22 +113,15 @@ export default function Apply() {
 function SubmitButton() {
   const [showAlertDialog, setShowAlertDialog] = React.useState(true);
   const toast = useToast();
+  const router = useRouter();
   return (
     <>
       <Button
         mt={"$4"}
         w={"100%"}
         onPress={() => {
-          toast.show({
-            placement: "top",
-            render: (props) => {
-              return (
-                <Box>
-                  <Heading>Thank you for volunteering!</Heading>
-                </Box>
-              );
-            },
-          });
+          router.back();
+          router.back();
         }}
       >
         <ButtonText>Submit</ButtonText>
