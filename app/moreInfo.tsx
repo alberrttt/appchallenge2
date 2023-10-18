@@ -13,6 +13,8 @@ import { Stack, useGlobalSearchParams, useRouter } from "expo-router";
 import { Button as DefaultButton } from "@gluestack-ui/themed";
 import { Pressable } from "react-native";
 import { Params } from "../params";
+import { useApplications } from "./store";
+import { useEffect } from "react";
 function InfoUnit({ title, body }: { body: string; title: string }) {
   return (
     <VStack>
@@ -30,6 +32,7 @@ export default function MoreInfo() {
   const router = useRouter();
   const params: Params = useGlobalSearchParams() as unknown as Params;
   const { title, uri, timeNeeded, distance } = params;
+
   return (
     <Box mt={"$10"}>
       <VStack p="$4" alignItems="flex-start" gap={"$2"}>

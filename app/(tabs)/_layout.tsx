@@ -30,6 +30,16 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="applications"
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color }) => <Box />,
+          tabBarLabel: () => {
+            return <FontAwesome name="inbox" color={"white"} size={48} />;
+          },
+        }}
+      />
+      <Tabs.Screen
         name="stats"
         options={{
           headerShown: false,

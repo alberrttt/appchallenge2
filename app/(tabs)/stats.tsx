@@ -58,7 +58,7 @@ function Stat() {
               <VStack gap={"$2"}>
                 <VStack justifyContent="space-between" alignItems="flex-start">
                   <Heading>Lifetime</Heading>
-                  <Text fontSize={"$xl"}>10.0 Hours</Text>
+                  <Text fontSize={"$xl"}>12.0 Hours</Text>
                 </VStack>
                 <VStack justifyContent="space-between" alignItems="flex-start">
                   <Heading>Yearly</Heading>

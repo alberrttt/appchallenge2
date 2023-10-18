@@ -41,12 +41,14 @@ import {
 import React from "react";
 import { BlurView } from "expo-blur";
 import { useState } from "react";
+import { useApplications } from "./store";
 
 export default function Apply() {
   const [hours, setHours] = useState(0);
   const Hours = Math.floor(hours);
   const minutes = Math.floor((hours - Hours) * 60);
   const props = useGlobalSearchParams();
+
   return (
     <Box mt="$20" px="$6">
       <Pressable
@@ -102,7 +104,7 @@ export default function Apply() {
                 <TextareaInput placeholder="Type here" />
               </Textarea>
             </Box>
-            <SubmitButton />
+            <SubmitButton hours={Hours} />
           </VStack>
         </VStack>
       </VStack>
@@ -110,10 +112,12 @@ export default function Apply() {
   );
 }
 
-function SubmitButton() {
+function SubmitButton({ hours }: { hours: number }) {
   const [showAlertDialog, setShowAlertDialog] = React.useState(true);
   const toast = useToast();
   const router = useRouter();
+  const props = useGlobalSearchParams();
+  const apps = useApplications();
   return (
     <>
       <Button
@@ -122,6 +126,15 @@ function SubmitButton() {
         onPress={() => {
           router.back();
           router.back();
+          apps.pushApplication({
+            amountTime: 0,
+            info: {
+              title: props.title,
+              uri: props.uri,
+              timeNeeded: props.timeNeeded,
+              distance: props.distance,
+            },
+          });
         }}
       >
         <ButtonText>Submit</ButtonText>

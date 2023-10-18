@@ -27,7 +27,9 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import SelectDropdown from "react-native-select-dropdown";
 import { Posts } from "../../components/Posts";
+import { useState } from "react";
 export default function HomeScreen() {
+  const [urgent, setUrgent] = useState(false);
   return (
     <Box p={"$8"} px={"$4"} mt="$10">
       <VStack>
@@ -70,10 +72,10 @@ export default function HomeScreen() {
           </Box>
           <Box alignItems="center">
             <Text>Urgent</Text>
-            <Switch mx="$4" />
+            <Switch mx="$4" value={urgent} onToggle={(a) => setUrgent(a)} />
           </Box>
         </Box>
-        <Posts />
+        <Posts urgent={urgent} />
       </VStack>
     </Box>
   );

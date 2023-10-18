@@ -13,28 +13,57 @@ import {
 } from "@gluestack-ui/themed";
 import { useNavigation, useRouter } from "expo-router";
 import { Params } from "../params";
-export function Posts() {
+import { useMemo } from "react";
+import { useApplications } from "../app/store";
+export function Posts({ urgent: isUrgent }: { urgent: boolean }) {
+  const apps = useApplications();
+  const posts = useMemo(
+    () => [
+      {
+        title: "Sunset Lane",
+        time: 1,
+        distance: 0.5,
+        uri: "https://imagescdn.homes.com/i2/0mTZG77SlD9lbsEdBh6r_2HJa9ZdabEWoVfDd0nZVMc/117/image.jpg?p=1",
+      },
+      {
+        title: "Robert C. Fistler",
+        time: 2,
+        distance: 1,
+        urgent: "Now",
+        uri: "https://lh3.googleusercontent.com/p/AF1QipMmDM0kNhN0J46it-mPOIsk0i2klMLMfoR1oDcc=s1360-w1360-h1020",
+      },
+      {
+        title: "Food bank",
+        time: 3,
+        distance: 3,
+        uri: "https://i0.wp.com/calmatters.org/wp-content/uploads/2022/06/060723-Food-Bank-SKN-CM_20.jpg?fit=1200%2C800&ssl=1",
+      },
+    ],
+    [],
+  );
   return (
     <ScrollView h={"88%"}>
-      <Post
-        title="Sunset Lane"
-        time={1}
-        distance={0.5}
-        uri="https://imagescdn.homes.com/i2/0mTZG77SlD9lbsEdBh6r_2HJa9ZdabEWoVfDd0nZVMc/117/image.jpg?p=1"
-      />
-      <Post
-        title="Robert C. Fistler"
-        time={2}
-        distance={1}
-        urgent="Now"
-        uri="https://lh3.googleusercontent.com/p/AF1QipMmDM0kNhN0J46it-mPOIsk0i2klMLMfoR1oDcc=s1360-w1360-h1020"
-      />
-      <Post
-        title="Food bank"
-        time={3}
-        distance={3}
-        uri="https://i0.wp.com/calmatters.org/wp-content/uploads/2022/06/060723-Food-Bank-SKN-CM_20.jpg?fit=1200%2C800&ssl=1"
-      />
+      {posts
+        .filter(({ urgent, title }) => {
+          return isUrgent
+            ? isUrgent && urgent
+            : true &&
+                apps.applications.filter(
+                  (predicate) => predicate.info.title === title,
+                ).length === 0;
+        })
+        .map(({ title, time, distance, uri, urgent }, k) => {
+          return (
+            <Post
+              key={k}
+              time={time}
+              title={title}
+              distance={distance}
+              uri={uri}
+              urgent={urgent}
+            />
+          );
+        })}
     </ScrollView>
   );
 }
@@ -56,6 +85,8 @@ function Post({
   description = "Help needed",
 }: PostProps) {
   const router = useRouter();
+  const applicationState = useApplications();
+
   return (
     <Box
       mt="$2"

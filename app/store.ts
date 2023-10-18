@@ -13,6 +13,8 @@ export const useApplications = create<{
   applications: Application[];
   setApplications: (applications: Application[]) => void;
   pushApplication: (application: Application) => void;
+  current: Application;
+  setCurrent: (application: Application) => void;
 }>((set) => ({
   applications: [
     {
@@ -20,10 +22,13 @@ export const useApplications = create<{
       info: {},
     },
   ],
+  current: undefined as unknown as Application,
+
   setApplications: (applications: Application[]) =>
     set({ applications: applications }),
   pushApplication: (application: Application) =>
     set((state) => ({ applications: [...state.applications, application] })),
+  setCurrent: (current: Application) => set((state) => ({ ...state, current })),
 }));
 export const useGoalData = create<{
   setYear: (year: number) => void;
@@ -36,6 +41,7 @@ export const useGoalData = create<{
   semester: 5,
   setSemester: (semester: number) => set({ semester: semester }),
 }));
+
 interface ScreenState {
   blur: boolean;
   setBlur: (blur: boolean) => void;
