@@ -99,6 +99,13 @@ function RootLayoutNav() {
           options={{ headerShown: false, header: undefined }}
         />
         <Stack.Screen name="moreInfo" />
+        <Tabs.Screen
+          name="editVolunteerHours"
+          options={{
+            headerShown: false,
+            header: undefined,
+          }}
+        />
       </Stack>
     </Provider>
   );

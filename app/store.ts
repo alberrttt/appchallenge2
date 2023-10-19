@@ -17,10 +17,7 @@ export const useApplications = create<{
   setCurrent: (application: Application) => void;
 }>((set) => ({
   applications: [
-    {
-      amountTime: 0,
-      info: {},
-    },
+
   ],
   current: undefined as unknown as Application,
 

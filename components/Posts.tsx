@@ -45,12 +45,12 @@ export function Posts({ urgent: isUrgent }: { urgent: boolean }) {
     <ScrollView h={"88%"}>
       {posts
         .filter(({ urgent, title }) => {
-          return isUrgent
-            ? isUrgent && urgent
-            : true &&
-                apps.applications.filter(
-                  (predicate) => predicate.info.title === title,
-                ).length === 0;
+          return (
+            (!!urgent ? isUrgent && !!urgent : true) &&
+            apps.applications.filter(
+              (predicate) => predicate.info.title === title,
+            ).length === 0
+          );
         })
         .map(({ title, time, distance, uri, urgent }, k) => {
           return (

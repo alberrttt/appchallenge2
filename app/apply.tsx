@@ -38,7 +38,7 @@ import {
   useLocalSearchParams,
   useRouter,
 } from "expo-router";
-import React from "react";
+import React, { useEffect } from "react";
 import { BlurView } from "expo-blur";
 import { useState } from "react";
 import { useApplications } from "./store";
@@ -79,7 +79,7 @@ export default function Apply() {
             </Text>
 
             <Slider
-              defaultValue={30}
+              defaultValue={0}
               size="md"
               orientation="horizontal"
               isDisabled={false}
@@ -93,18 +93,21 @@ export default function Apply() {
               </SliderTrack>
               <SliderThumb />
             </Slider>
-            <Text>
-              {Hours > 0 ? `${Hours} ${hours == 1 ? "hour" : "hours"}` : ""}
-              {minutes > 0 ? ` ${minutes} minutes` : ""}
-            </Text>
-
+            {!hours && !minutes ? (
+              <Text>0 minutes</Text>
+            ) : (
+              <Text>
+                {Hours > 0 ? `${Hours} ${hours == 1 ? "hour" : "hours"}` : ""}
+                {minutes > 0 ? ` ${minutes} minutes` : ""}
+              </Text>
+            )}
             <Box>
               <Heading>Any notes or comments?</Heading>
               <Textarea size="md">
                 <TextareaInput placeholder="Type here" />
               </Textarea>
             </Box>
-            <SubmitButton hours={Hours} />
+            <SubmitButton hours={hours} />
           </VStack>
         </VStack>
       </VStack>
@@ -118,6 +121,8 @@ function SubmitButton({ hours }: { hours: number }) {
   const router = useRouter();
   const props = useGlobalSearchParams();
   const apps = useApplications();
+  console.log(hours);
+
   return (
     <>
       <Button
@@ -127,7 +132,7 @@ function SubmitButton({ hours }: { hours: number }) {
           router.back();
           router.back();
           apps.pushApplication({
-            amountTime: 0,
+            amountTime: hours,
             info: {
               title: props.title,
               uri: props.uri,
