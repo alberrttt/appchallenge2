@@ -77,7 +77,9 @@ function RootLayoutNav() {
   const colorScheme = useColorScheme();
   const LoginState = useLoginStore((state) => state);
   const router = useRouter();
-
+  useEffect(() => {
+    router.push("/login");
+  }, []);
   return (
     <Provider config={config}>
       <StatusBar />

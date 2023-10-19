@@ -38,15 +38,18 @@ import {
   useLocalSearchParams,
   useRouter,
 } from "expo-router";
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { BlurView } from "expo-blur";
 import { useState } from "react";
 import { useApplications } from "./store";
+import { getHoursAndMinutesFromFractionalHour } from "../hours";
 
 export default function Apply() {
-  const [hours, setHours] = useState(0);
-  const Hours = Math.floor(hours);
-  const minutes = Math.floor((hours - Hours) * 60);
+  const [Hours, setHours] = useState(0);
+  const { hours, minutes } = useMemo(
+    () => getHoursAndMinutesFromFractionalHour(Hours),
+    [Hours],
+  );
   const props = useGlobalSearchParams();
 
   return (
@@ -97,7 +100,7 @@ export default function Apply() {
               <Text>0 minutes</Text>
             ) : (
               <Text>
-                {Hours > 0 ? `${Hours} ${hours == 1 ? "hour" : "hours"}` : ""}
+                {hours > 0 ? `${hours} ${hours == 1 ? "hour" : "hours"}` : ""}
                 {minutes > 0 ? ` ${minutes} minutes` : ""}
               </Text>
             )}
@@ -107,7 +110,7 @@ export default function Apply() {
                 <TextareaInput placeholder="Type here" />
               </Textarea>
             </Box>
-            <SubmitButton hours={hours} />
+            <SubmitButton hours={Hours} />
           </VStack>
         </VStack>
       </VStack>

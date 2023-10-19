@@ -36,7 +36,9 @@ export default function () {
                       router.push({
                         pathname: "/editVolunteerHours",
                         params: {
-                          title: app.info.title,
+                          ...app.info,
+                          amountTime: app.amountTime,
+                          key: key,
                         },
                       });
                     }}

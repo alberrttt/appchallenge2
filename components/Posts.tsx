@@ -46,7 +46,7 @@ export function Posts({ urgent: isUrgent }: { urgent: boolean }) {
       {posts
         .filter(({ urgent, title }) => {
           return (
-            (!!urgent ? isUrgent && !!urgent : true) &&
+            (isUrgent ? urgent : true) &&
             apps.applications.filter(
               (predicate) => predicate.info.title === title,
             ).length === 0
