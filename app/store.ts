@@ -1,10 +1,12 @@
 import { create } from "zustand";
 interface LoginState {
   name: string;
+  zipcode: number;
   logged_in: boolean;
   setLoggedIn: (name: string) => void;
 }
 export const useLoginStore = create<LoginState>((set) => ({
+  zipcode: 92833,
   name: "",
   logged_in: false,
   setLoggedIn: (name: string) => set({ name, logged_in: true }),
@@ -16,9 +18,7 @@ export const useApplications = create<{
   current: Application;
   setCurrent: (application: Application) => void;
 }>((set) => ({
-  applications: [
-
-  ],
+  applications: [],
   current: undefined as unknown as Application,
 
   setApplications: (applications: Application[]) =>
@@ -43,8 +43,3 @@ interface ScreenState {
   blur: boolean;
   setBlur: (blur: boolean) => void;
 }
-export const useScreenStore = create<LoginState>((set) => ({
-  name: "",
-  logged_in: false,
-  setLoggedIn: (name: string) => set({ name, logged_in: true }),
-}));

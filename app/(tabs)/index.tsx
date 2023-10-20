@@ -1,4 +1,4 @@
-import { ActionSheetIOS, StyleSheet } from "react-native";
+import { ActionSheetIOS, Animated, StyleSheet } from "react-native";
 
 import EditScreenInfo from "../../components/EditScreenInfo";
 import {
@@ -27,15 +27,57 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import SelectDropdown from "react-native-select-dropdown";
 import { Posts } from "../../components/Posts";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useLoginStore } from "../store";
+import { BlurView } from "expo-blur";
 export default function HomeScreen() {
   const [urgent, setUrgent] = useState(false);
+  const logins = useLoginStore();
+  const anim = useRef(new Animated.Value(-200)).current;
+  const [blur, setBlur] = useState(true);
+  useEffect(() => {
+    Animated.timing(anim, {
+      toValue: 0,
+      duration: 1000,
+      useNativeDriver: false,
+    }).start(() => {
+      setBlur(false);
+    });
+  }, []);
   return (
     <Box p={"$8"} px={"$4"} mt="$10">
       <VStack>
-        <Heading fontSize={"$3xl"}>Community Service</Heading>
+        <Animated.View
+          style={{
+            top: anim,
+          }}
+        >
+          <Heading fontSize={"$4xl"} color="$trueGray600">
+            Welcome, {logins.name}
+          </Heading>
+          <Heading pt="$2" fontSize={"$4xl"}>
+            Here's some community service
+          </Heading>
+        </Animated.View>
+        <Text py="$1">Near {logins.zipcode}, Fullerton</Text>
+        {blur ? (
+          <BlurView
+            intensity={20}
+            tint={"light"}
+            style={{
+              position: "absolute",
+              top: 110,
+              zIndex: 4,
+              height: "100%",
+              width: "100%",
+            }}
+          />
+        ) : (
+          ""
+        )}
+
         <Box
-          py={"$2"}
+          pb={"$2"}
           flexDirection="row"
           justifyContent="space-between"
           alignItems="flex-end"

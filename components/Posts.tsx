@@ -88,22 +88,7 @@ function Post({
   const applicationState = useApplications();
 
   return (
-    <Box
-      mt="$2"
-      py="$2"
-      shadowColor="$coolGray500"
-      shadowOffset={{
-        width: 4,
-        height: 4,
-      }}
-      backgroundColor="$trueGray100"
-      px="$2"
-      shadowOpacity={0.1}
-      shadowRadius={10.84}
-      borderRadius={"$lg"}
-      boxShadow="$amber200"
-      softShadow="3"
-    >
+    <Box mt="$2" py="$2" px="$2" borderRadius={"$lg"}>
       <VStack space="md">
         <Image
           borderRadius={8}

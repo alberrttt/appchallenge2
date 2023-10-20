@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   InputField,
@@ -26,6 +26,8 @@ import { useRoute } from "@react-navigation/native";
 export default function () {
   const login = useLoginStore((state) => state);
   const router = useRouter();
+  const [name, setName] = React.useState("");
+  const [zipcode, setZipcode] = useState(0);
   return (
     <Box px={"$8"} mt="$48">
       <FormControl
@@ -56,7 +58,13 @@ export default function () {
                 Your Name
               </Text>
               <Input>
-                <InputField type="text" />
+                <InputField
+                  type="text"
+                  value={name}
+                  onChange={(e) => {
+                    setName(e.nativeEvent.text);
+                  }}
+                />
               </Input>
             </VStack>
             <VStack space="xs">
@@ -103,6 +111,25 @@ export default function () {
                     color="$darkBlue500"
                   />
                 </InputSlot>
+              </Input>
+            </VStack>
+            <VStack space="xs">
+              <Text
+                color={"$textLight600"}
+                lineHeight="$xs"
+                fontFamily="Lato"
+                fontSize={"$xl"}
+              >
+                Zip Code
+              </Text>
+              <Input>
+                <InputField
+                  type="text"
+                  value={zipcode ? String(zipcode) : ""}
+                  onChange={(e) => {
+                    setZipcode(Number(e.nativeEvent.text));
+                  }}
+                />
               </Input>
             </VStack>
           </VStack>
@@ -154,7 +181,9 @@ export default function () {
             ml="auto"
             backgroundColor={"$primary400"}
             onPress={() => {
-              login.setLoggedIn("a");
+              login.zipcode = zipcode;
+
+              login.setLoggedIn(name);
               router.push("/(tabs)");
             }}
             w={"100%"}
