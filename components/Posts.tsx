@@ -42,7 +42,7 @@ export function Posts({ urgent: isUrgent }: { urgent: boolean }) {
     [],
   );
   return (
-    <ScrollView h={"88%"}>
+    <ScrollView h="75%">
       {posts
         .filter(({ urgent, title }) => {
           return (

@@ -34,14 +34,18 @@ export default function HomeScreen() {
   const [urgent, setUrgent] = useState(false);
   const logins = useLoginStore();
   const anim = useRef(new Animated.Value(-200)).current;
-  const [blur, setBlur] = useState(true);
+  const [blur, setBlur] = useState(1);
   useEffect(() => {
     Animated.timing(anim, {
       toValue: 0,
       duration: 1000,
       useNativeDriver: false,
     }).start(() => {
-      setBlur(false);
+      for (let i = 0; i < 20; i++) {
+        setTimeout(() => {
+          setBlur((prev) => prev - 0.05);
+        }, 5);
+      }
     });
   }, []);
   return (
@@ -52,17 +56,33 @@ export default function HomeScreen() {
             top: anim,
           }}
         >
-          <Heading fontSize={"$4xl"} color="$trueGray600">
-            Welcome, {logins.name}
-          </Heading>
-          <Heading pt="$2" fontSize={"$4xl"}>
-            Here's some community service
-          </Heading>
+          <HStack justifyContent="space-between" alignItems="center">
+            <VStack>
+              <Heading fontSize={"$4xl"} pt="$4" color="$trueGray600">
+                Welcome,
+              </Heading>
+              <Heading fontSize={"$4xl"} pt="$2" color="$trueGray600">
+                {logins.name}
+              </Heading>
+            </VStack>
+            {blur <= 0.1 ? (
+              <Image
+                aspectRatio={1}
+                w={"auto"}
+                h={"$24"}
+                alt={""}
+                borderRadius={8}
+                source={require("../../assets/images/unnamed.png")}
+              />
+            ) : undefined}
+          </HStack>
         </Animated.View>
-        <Text py="$1">Near {logins.zipcode}, Fullerton</Text>
-        {blur ? (
+        <Text py="$1">
+          Showing community service near {logins.zipcode}, Fullerton
+        </Text>
+        {blur > 0.1 ? (
           <BlurView
-            intensity={20}
+            intensity={blur * 100}
             tint={"light"}
             style={{
               position: "absolute",

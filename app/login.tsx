@@ -17,6 +17,7 @@ import {
   Radio,
   RadioIcon,
   CircleIcon,
+  Image,
   RadioLabel,
 } from "@gluestack-ui/themed";
 import { useLoginStore } from "./store";
@@ -29,7 +30,19 @@ export default function () {
   const [name, setName] = React.useState("");
   const [zipcode, setZipcode] = useState(0);
   return (
-    <Box px={"$8"} mt="$48">
+    <Box px={"$8"} mt="$24">
+      <HStack alignItems="center" justifyContent="space-between">
+        <Heading fontSize={"$5xl"} pt="$8">
+          Easervice
+        </Heading>
+        <Image
+          aspectRatio={1}
+          flex={1}
+          alt={""}
+          borderRadius={8}
+          source={require("../assets/images/unnamed.png")}
+        />
+      </HStack>
       <FormControl
         p="$4"
         borderWidth="$1"
@@ -133,50 +146,9 @@ export default function () {
               </Input>
             </VStack>
           </VStack>
-          <Text mt="$2">Who are you?</Text>
-          <HStack my="$2" space="2xl">
-            <RadioGroup>
-              <Radio
-                value="change"
-                size="md"
-                isInvalid={false}
-                isDisabled={false}
-              >
-                <RadioIndicator mr="$1">
-                  <RadioIcon as={CircleIcon} />
-                </RadioIndicator>
-                <RadioLabel>Student</RadioLabel>
-              </Radio>
-            </RadioGroup>
-            <RadioGroup>
-              <Radio
-                value="change"
-                size="md"
-                isInvalid={false}
-                isDisabled={false}
-              >
-                <RadioIndicator mr="$1">
-                  <RadioIcon as={CircleIcon} />
-                </RadioIndicator>
-                <RadioLabel>Teacher</RadioLabel>
-              </Radio>
-            </RadioGroup>
-            <RadioGroup>
-              <Radio
-                value="change"
-                size="md"
-                isInvalid={false}
-                isDisabled={false}
-              >
-                <RadioIndicator mr="$1">
-                  <RadioIcon as={CircleIcon} />
-                </RadioIndicator>
-                <RadioLabel>Charity</RadioLabel>
-              </Radio>
-            </RadioGroup>
-          </HStack>
 
           <Button
+            mt={"$4"}
             p={"$2"}
             ml="auto"
             backgroundColor={"$primary400"}

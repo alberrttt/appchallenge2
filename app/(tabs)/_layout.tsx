@@ -19,7 +19,6 @@ export default function TabLayout() {
         },
       }}
     >
-     
       <Tabs.Screen
         name="index"
         options={{
@@ -27,6 +26,16 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <Box />,
           tabBarLabel: () => {
             return <FontAwesome name="home" color={"white"} size={48} />;
+          },
+        }}
+      />
+      <Tabs.Screen
+        name="new"
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color }) => <Box />,
+          tabBarLabel: () => {
+            return <FontAwesome name="plus" color={"white"} size={48} />;
           },
         }}
       />
