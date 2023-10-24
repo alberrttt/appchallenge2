@@ -31,7 +31,7 @@ function InfoUnit({ title, body }: { body: string; title: string }) {
 export default function MoreInfo() {
   const router = useRouter();
   const params: Params = useGlobalSearchParams() as unknown as Params;
-  const { title, uri, timeNeeded, distance } = params;
+  const { title, uri, timeNeeded, distance, occurence } = params;
 
   return (
     <Box mt={"$10"}>
@@ -79,7 +79,7 @@ export default function MoreInfo() {
           </HStack>
 
           <HStack w="100%" justifyContent="space-between" space="md">
-            <InfoUnit title="When" body="Monday, 3 PM" />
+            <InfoUnit title="When" body={occurence} />
             <InfoUnit title="Occurence" body="Weekly" />
           </HStack>
         </VStack>

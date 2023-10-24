@@ -38,15 +38,9 @@ export default function HomeScreen() {
   useEffect(() => {
     Animated.timing(anim, {
       toValue: 0,
-      duration: 1000,
+      duration: 500,
       useNativeDriver: false,
-    }).start(() => {
-      for (let i = 0; i < 20; i++) {
-        setTimeout(() => {
-          setBlur((prev) => prev - 0.05);
-        }, 5);
-      }
-    });
+    }).start(() => {});
   }, []);
   return (
     <Box p={"$8"} px={"$4"} mt="$10">
@@ -65,36 +59,19 @@ export default function HomeScreen() {
                 {logins.name}
               </Heading>
             </VStack>
-            {blur <= 0.1 ? (
-              <Image
-                aspectRatio={1}
-                w={"auto"}
-                h={"$24"}
-                alt={""}
-                borderRadius={8}
-                source={require("../../assets/images/unnamed.png")}
-              />
-            ) : undefined}
+            <Image
+              aspectRatio={1}
+              w={"auto"}
+              h={"$24"}
+              alt={""}
+              borderRadius={8}
+              source={require("../../assets/images/unnamed.png")}
+            />
           </HStack>
         </Animated.View>
         <Text py="$1">
           Showing community service near {logins.zipcode}, Fullerton
         </Text>
-        {blur > 0.1 ? (
-          <BlurView
-            intensity={blur * 100}
-            tint={"light"}
-            style={{
-              position: "absolute",
-              top: 110,
-              zIndex: 4,
-              height: "100%",
-              width: "100%",
-            }}
-          />
-        ) : (
-          ""
-        )}
 
         <Box
           pb={"$2"}

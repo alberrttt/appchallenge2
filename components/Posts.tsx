@@ -24,6 +24,8 @@ export function Posts({ urgent: isUrgent }: { urgent: boolean }) {
         time: 1,
         distance: 0.5,
         uri: "https://imagescdn.homes.com/i2/0mTZG77SlD9lbsEdBh6r_2HJa9ZdabEWoVfDd0nZVMc/117/image.jpg?p=1",
+        occurence: "Monday, 3PM",
+        description: "Help prepare the classroom for halloween",
       },
       {
         title: "Robert C. Fistler",
@@ -31,12 +33,30 @@ export function Posts({ urgent: isUrgent }: { urgent: boolean }) {
         distance: 1,
         urgent: "Now",
         uri: "https://lh3.googleusercontent.com/p/AF1QipMmDM0kNhN0J46it-mPOIsk0i2klMLMfoR1oDcc=s1360-w1360-h1020",
+        occurence: "Tuesday, 2:50PM",
+        description: "Help grade tests for 5th grade",
       },
       {
         title: "Food bank",
         time: 3,
         distance: 3,
+        occurence: "Friday, 4:00 PM",
         uri: "https://i0.wp.com/calmatters.org/wp-content/uploads/2022/06/060723-Food-Bank-SKN-CM_20.jpg?fit=1200%2C800&ssl=1",
+      },
+      {
+        title: "Trash Pickup at the Park",
+        time: 4,
+        distance: 1,
+        occurence: "Thursday 3:30 PM",
+        uri: "https://www.sciencenews.org/wp-content/uploads/2019/01/010219_LH_ocean-plastic_feat.jpg",
+      },
+      {
+        title: "Fullerton Public Library",
+        time: 4,
+        distance: 2,
+        occurence: "Tuesdays 3:30 PM",
+        uri: "https://lh3.googleusercontent.com/p/AF1QipP-Qm7hFuJOSzrn4KvO6klfbzFw1LKX-j4uUspq=s1360-w1360-h1020",
+        description: "help sort and shelve books",
       },
     ],
     [],
@@ -52,18 +72,33 @@ export function Posts({ urgent: isUrgent }: { urgent: boolean }) {
             ).length === 0
           );
         })
-        .map(({ title, time, distance, uri, urgent }, k) => {
-          return (
-            <Post
-              key={k}
-              time={time}
-              title={title}
-              distance={distance}
-              uri={uri}
-              urgent={urgent}
-            />
-          );
-        })}
+        .map(
+          (
+            {
+              title,
+              time,
+              distance,
+              uri,
+              urgent,
+              occurence,
+              description = "help needed",
+            },
+            k,
+          ) => {
+            return (
+              <Post
+                key={k}
+                time={time}
+                title={title}
+                distance={distance}
+                uri={uri}
+                urgent={urgent}
+                occurence={occurence}
+                description={description}
+              />
+            );
+          },
+        )}
     </ScrollView>
   );
 }
@@ -75,6 +110,7 @@ export interface PostProps {
   uri: string;
   urgent?: string;
   description?: string;
+  occurence: string;
 }
 function Post({
   title,
@@ -82,6 +118,7 @@ function Post({
   distance,
   uri,
   urgent,
+  occurence,
   description = "Help needed",
 }: PostProps) {
   const router = useRouter();
@@ -134,6 +171,7 @@ function Post({
                   uri: uri,
                   timeNeeded: time,
                   distance,
+                  occurence,
                 },
               });
             }}

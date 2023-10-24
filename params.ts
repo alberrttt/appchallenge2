@@ -4,6 +4,7 @@ export interface Params {
   uri: string;
   // in minutes
   timeNeeded: number;
+  occurence: string;
   distance: number;
   description: string;
 }
